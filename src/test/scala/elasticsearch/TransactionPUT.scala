@@ -1,8 +1,10 @@
-import com.excilys.ebi.gatling.core.scenario.configuration.Simulation
+package elasticsearch
 
 import com.excilys.ebi.gatling.core.Predef._
 import com.excilys.ebi.gatling.http.Predef._
-import com.excilys.ebi.gatling.http.Headers.Names._
+import com.excilys.ebi.gatling.jdbc.Predef._
+import akka.util.duration._
+
 import bootstrap._
 
 class ElasticPUTBenchmark extends Simulation {
@@ -17,12 +19,12 @@ class ElasticPUTBenchmark extends Simulation {
 
   val scn = scenario("ElasticSearch PUT benchmarking")
     .repeat(1) {
-    exec(http("req0")
-      .get("/gatling/ratatata/ta0")
-      .check(status.is(200))
-      .pause(0 milliseconds, 100 milliseconds)
-    )
-  }
+      exec(
+        http("req0")
+          .get("/gatling/ratatata/ta0")
+          .check(status.is(200)))
+          .pause(0 milliseconds, 100 milliseconds)
+    }
 }
 
 
